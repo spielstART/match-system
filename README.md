@@ -1,7 +1,5 @@
 # Match-System
 
----
-
 Implementation of a Match-System NodeJS module.
 
 ##  Feature Set
@@ -25,8 +23,6 @@ Implementation of a Match-System NodeJS module.
   * groups
   * tree
   * (timeline)
-
-
 
 ## Technologie
 
