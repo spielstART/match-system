@@ -17,8 +17,14 @@ Implementation of a Match-System NodeJS module.
 ### Routes
 
 * users
-** login
-** sadasd
+  * signin
+  * signup
+  * profile
+  * playerlist
+* brackets
+  * groups
+  * tree
+  * (timeline)
 
 
 
@@ -28,7 +34,7 @@ Implementation of a Match-System NodeJS module.
 * mongoDB (www.mongodb.org) / levelDB
 * mongoose
 * Jade - HTML Templating-Engine
-
+* passport sigin module / auth module
 
 ## Aufteilung im Team
 
