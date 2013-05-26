@@ -7,9 +7,16 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy
+  , db = require('./db');
+  
 
 var app = express();
+
+
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -31,6 +38,9 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/user/login', user.login);
+
+app.post('/signup', user.signup);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p Login:
+  
+  form(action='/signup', method='post')
+    label(for='username') username
+    input(id='username', type='text', value='', name='username')
+    br
+    label(for='password') password
+    input(id='password', type='password', value='', name='password')
+    br
+    input(type='submit')
+  br
+  a(href='/') Back to Home
