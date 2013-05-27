@@ -8,10 +8,38 @@ var express = require('express')
   , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
+    // require passport & localStrategy
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
-  , db = require('./db');
-  
+  , db = require('./db')
+  , mongoose = require('mongoose')
+  , utils = require('mongoose/lib/utils');
+
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        db.User.findOne({ username: username }, function (err, user) {
+            if(err) return done(err);
+            if (!user) {
+                return done(null, false, { message: "Incorrect username"});
+            }
+            if (!user.validPassword(password)) {
+                return done(null, false, {message: "Incorrect password"})
+            }
+            return done(null, user);
+        });
+    }
+));
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    db.User.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
 
 var app = express();
 
@@ -25,6 +53,9 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('your secret here'));
 app.use(express.session());
+// initialize passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -42,12 +73,20 @@ app.get('/tournament', routes.tournament);
 
 // user post routes
 app.post('/signup', user.signup);
-app.post('/userlogin', user.userlogin);
+app.post('/userlogin',
+    passport.authenticate('local', { successRedirect: '/',
+                                     failureRedirect: '/user/login',
+                                     failureFlash: false })
+    //console.log(req.user);
+);
 
 
 // tournament post routes
 app.post('/enterTournament', routes.enterTournament);
 app.post('/leaveTournament', routes.leaveTournament);
+
+
+
 
 
 http.createServer(app).listen(app.get('port'), function(){

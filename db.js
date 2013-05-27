@@ -16,10 +16,16 @@ db.once('open', function callback () {
 	//user schema
 	var userSchema = mongoose.Schema({
 		username:	String,
-		password:	String		
+		password:	String
 	});
 
-	//playerlist schema
+    userSchema.methods.validPassword = function (password) {
+        console.log( this.password === password );
+        return this.password === password;
+    }
+
+
+    //playerlist schema
 	var playerlistSchema = mongoose.Schema({
 	players: [userSchema]
 	});

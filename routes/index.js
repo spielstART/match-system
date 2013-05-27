@@ -5,6 +5,7 @@
 
 exports.index = function(req, res){
   res.render('index', { title: 'Match-System' });
+  console.log(req.user);
 };
 
 exports.tournament = function(req, res){
