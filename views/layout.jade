@@ -2,6 +2,21 @@ doctype 5
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    //link(rel='stylesheet', href='/stylesheets/style.css')
+    // Bootstrap
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
   body
-    block content
+    script(src='/javascripts/jquery-1.10.0.min.js')
+    script(src='/bootstrap/js/bootstrap.min.js')
+    div.container-fluid
+      div.masthead.navbar-inner
+        ul.nav.nav-pills.pull-right
+          li
+            a(href='/') Home
+          li
+            a(href='/user/login') Signup
+          li
+            a(href='/users') Userlist
+        h3.muted Match-System	
+      div.hero-unit
+        block content
