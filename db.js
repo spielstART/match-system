@@ -8,12 +8,16 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
 	console.log('database connection succesfull!');
 	
+
+  /**************
+  ***SCHEMES*****
+  **************/
+
 	//user schema
 	var userSchema = mongoose.Schema({
 		username:	String,
 		password:	String		
 	});
-
 
 	//playerlist schema
 	var playerlistSchema = mongoose.Schema({
@@ -21,13 +25,16 @@ db.once('open', function callback () {
 	});
 
 
+  /**************
+  ****MODELS*****
+  **************/
 	//models
 	var User = mongoose.model('User', userSchema);
 	var PlayerList = mongoose.model('PlayerList', playerlistSchema);
 	
 	exports.User = User;
 	exports.PlayerList = PlayerList;
-	
+
 	
 });
 

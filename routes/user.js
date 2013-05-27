@@ -19,9 +19,9 @@ exports.list = function(req, res){
 };
 
 
-exports.login = function(req, res)
+exports.signupform = function(req, res)
 {
-	res.render('login', {title: 'Login'});
+	res.render('signupform', {title: 'Signup'});
 };
 
 
@@ -41,3 +41,19 @@ exports.signup = function(req, res)
 	});
 	
 };
+
+
+exports.login = function(req, res)
+{
+	res.render('login', {title: 'Login'});
+
+
+}
+
+
+exports.userlogin = function(req,res)
+{
+	res.render('userlogin', {title: 'userlogin', username: req.body.username});
+	console.log(req.body);
+
+}

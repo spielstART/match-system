@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h3 Welcome to #{title}
+
+  //ul
+  //  for each user in playerlist
+  //    li= user.username
+    
+  ul
+    li player1
+    li player2
+    li player3
+    li player4
+
+
+  form(action='/enterTournament', method='post')
+    input(type='submit', value='Enter Tournament')
+  form(action='/leaveTournament', method='post')
+    input(type='submit', value='Leave Tournament')
+
+  br
+  a(href='/') Back to Home
