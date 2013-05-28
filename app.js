@@ -59,16 +59,24 @@ app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
+
+
 
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/user/signup', user.signupform);
 app.get('/user/login', user.login);
 app.get('/tournament', routes.tournament);
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 
 // user post routes

@@ -3,15 +3,14 @@ extends layout
 block content
   h3 Welcome to #{title}
 
-  //ul
-  //  for each user in playerlist
-  //    li= user.username
+
+  if !playerlist
+    p no players yet!
+  else
+    ul
+      for player in playerlist
+        li= player.players[0].username
     
-  ul
-    li player1
-    li player2
-    li player3
-    li player4
 
 
   form(action='/enterTournament', method='post')
