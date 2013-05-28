@@ -9,7 +9,7 @@
     "express": "3.2.0",
     "jade": "*",
     "mongoose": "*",
-    "passport": "*"
+    "passport": "*",
     "passport-local": "*"
   }
 }
