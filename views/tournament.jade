@@ -10,13 +10,13 @@ block content
     ul
       for player in playerlist
         li= player.players[0].username
-    
+
 
 
   form(action='/enterTournament', method='post')
-    input(type='submit', value='Enter Tournament')
+    input(type='submit', value='Enter Tournament').btn
   form(action='/leaveTournament', method='post')
-    input(type='submit', value='Leave Tournament')
+    input(type='submit', value='Leave Tournament').btn
 
   br
   a(href='/') Back to Home
