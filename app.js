@@ -63,10 +63,6 @@ currentUser = function (req, res, next){
 	{
 		res.locals.currentUser = req.user;
 	}
-	else
-	{
-		res.locals.currentUser = 'null';
-	}
 	next();
 }
 

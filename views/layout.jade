@@ -29,7 +29,7 @@ html
                 a(href='/tournament') Tournament
             ul.nav.pull-right
               li
-                if (currentUser !== 'null')
+                if currentUser.username
                   h6 logged in as <em>#{currentUser.username}</em>
                 else
                   h6 not logged in

@@ -44,11 +44,17 @@ exports.leaveTournament = function(req, res){
 	db.PlayerList.find({"players.username": req.user.username}, function(err, user){
 		if (err) 
 			throw err;
+		else if (user[0] === undefined)
+		{
+			console.log("user not in list");
+			res.redirect('/tournament');
+		}
 		else
+		{
 			user[0].remove(function (err){if (err) throw err;});
-
 			console.log(req.user.username + " left the tournament!");
 			res.redirect('/tournament');
+		}
 });
 	
 	
