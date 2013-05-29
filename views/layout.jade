@@ -1,28 +1,35 @@
 doctype 5
 html
   head
-    title= title
+    title=title
     //link(rel='stylesheet', href='/stylesheets/style.css')
     // Bootstrap
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap-responsive.min.css')
   body
     script(src='/javascripts/jquery-1.10.0.min.js')
     script(src='/bootstrap/js/bootstrap.min.js')
+    div.navbar.navbar-fixed-top
+      div.navbar-inner
+        div.container
+          button(type='button')(data-toggle='collapse')(data-target='.nav-collapse').btn.btn-navbar
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(href='/').brand Match-System
+          div.nav-collapse.collapse
+            ul.nav
+              li
+                a(href='/user/signup') Signup
+              li
+                a(href='/user/login') Login
+              li
+                a(href='/users') Userlist
+              li
+                a(href='/tournament') Tournament
+            ul.nav.pull-right
+              li
+                a(href='/logout') Logout
     div.container
-      div.masthead.navbar-inner
-        ul.nav.nav-pills.pull-right
-          li
-            a(href='/') Home
-          li
-            a(href='/user/signup') Signup
-          li
-            a(href='/user/login') Login
-          li
-            a(href='/users') Userlist
-          li
-            a(href='/tournament') Tournament
-        h3.muted Match-System	
-        
-        a(href='/logout') logout
       div.hero-unit
         block content
