@@ -40,7 +40,6 @@ passport.deserializeUser(function(id, done) {
     });
 });
 
-
 var app = express();
 
 // all environments
@@ -59,19 +58,30 @@ app.use(passport.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+currentUser = function (req, res, next){
+	if (req.user !== undefined)
+	{
+		res.locals.currentUser = req.user;
+	}
+	else
+	{
+		res.locals.currentUser = 'null';
+	}
+	next();
+}
+
+
 
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-
-
-app.get('/', routes.index);
-app.get('/users', user.list);
-app.get('/user/signup', user.signupform);
-app.get('/user/login', user.login);
-app.get('/tournament', routes.tournament);
+app.get('/', currentUser, routes.index);
+app.get('/users', currentUser, user.list);
+app.get('/user/signup', currentUser, user.signupform);
+app.get('/user/login', currentUser, user.login);
+app.get('/tournament', currentUser, routes.tournament);
 
 app.get('/logout', function(req, res){
   req.logout();

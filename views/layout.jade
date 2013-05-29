@@ -29,6 +29,11 @@ html
                 a(href='/tournament') Tournament
             ul.nav.pull-right
               li
+                if (currentUser !== 'null')
+                  h6 logged in as <em>#{currentUser.username}</em>
+                else
+                  h6 not logged in
+              li
                 a(href='/logout') Logout
     div.container
       div.hero-unit

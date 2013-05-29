@@ -5,7 +5,7 @@
 
 var db = require('../db'); 
  
-
+//get
 exports.list = function(req, res){
   var userlist = 'test';
   
@@ -13,18 +13,18 @@ exports.list = function(req, res){
 	if (err)
 		throw err;
 	else
-		res.render('users', {title: 'Userlist', users: userlist});
+		res.render('users', {title: 'Userlist', users: userlist, user: req.user});
   });
 	
 };
 
-
+//get
 exports.signupform = function(req, res)
 {
 	res.render('signupform', {title: 'Signup'});
 };
 
-
+//post
 exports.signup = function(req, res)
 {
 	res.render('signup', {title: 'Match-System', username: req.body.username, password: req.body.password});
@@ -42,7 +42,7 @@ exports.signup = function(req, res)
 	
 };
 
-
+//get
 exports.login = function(req, res)
 {
 	res.render('login', {title: 'Login'});
@@ -50,7 +50,7 @@ exports.login = function(req, res)
 
 }
 
-
+//post
 exports.userlogin = function(req,res)
 {
 	res.render('userlogin', {title: 'userlogin', username: req.body.username});

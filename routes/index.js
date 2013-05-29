@@ -4,12 +4,13 @@
  */
 var db = require('../db');
 
-
+//get
 exports.index = function(req, res){
-	res.render('index', { title: 'Match-System'});
+	res.render('index', { title: 'Match-System', user: req.user});
   console.log(req.user);
 };
 
+//get
 exports.tournament = function(req, res){
 	
 
@@ -18,7 +19,7 @@ exports.tournament = function(req, res){
 		if (err) throw err;
 
 		if(req.user)
-			res.render('tournament', {title: 'Tournament', playerlist: playerlist});
+			res.render('tournament', {title: 'Tournament', playerlist: playerlist, user: req.user});
 		else
 			res.redirect('/');
     
@@ -26,6 +27,7 @@ exports.tournament = function(req, res){
 	});
 }
 
+//post
 exports.enterTournament = function(req, res){
 	var Bomberman = new db.PlayerList({players: req.user});
 	Bomberman.save(function (err){
@@ -36,7 +38,7 @@ exports.enterTournament = function(req, res){
   
 }
 
-
+//post
 exports.leaveTournament = function(req, res){
   
 	db.PlayerList.find({"players.username": req.user.username}, function(err, user){
