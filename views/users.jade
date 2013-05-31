@@ -1,11 +1,23 @@
 extends layout
 
 block content
-  h3= title
-  p List of all registered Users
-  ul
-    for user in users
-      li= user.username
-
-  
-  a(href='/') Back to Home
+	h1= title
+	br
+	p List of all registered Users
+	- var number = 0;
+	div.well
+		table.table
+			thead
+				tr
+					th #
+					th Username
+					th E-Mail
+					th created at
+			tbody
+				for user in users
+					- number++;
+					tr
+						td= number
+						td= user.username
+						td= user.email
+						td= user.created

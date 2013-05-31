@@ -28,14 +28,24 @@ exports.tournament = function(req, res) {
 
 //post
 exports.enterTournament = function(req, res) {
-    var Bomberman = new db.PlayerList({players: req.user});
-    Bomberman.save(function (err) {
-        if (err) {
-            throw err;
-        }
-        console.log(req.user.username + " enrolled in tournament!");
-        res.redirect('/tournament');
-    });
+	db.PlayerList.find({"players.username": req.user.username}, function(err, user){
+		if(err)
+			throw err;
+		else if (user[0] === undefined){
+			var Bomberman = new db.PlayerList({players: req.user});
+			Bomberman.save(function (err) {
+				if (err) {
+           throw err;
+				}
+				console.log(req.user.username + " enrolled in tournament!");
+				res.redirect('/tournament');
+			});
+		}
+		else{
+			console.log("user already in list");
+			res.redirect('/tournament');
+		}
+	});
 };
 
 //post

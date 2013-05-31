@@ -10,6 +10,9 @@
     "jade": "*",
     "mongoose": "*",
     "passport": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+		"nodemailer": "*",
+		"async": "*",
+		"connect-flash": "*"
   }
 }

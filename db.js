@@ -10,13 +10,15 @@ db.once('open', function callback () {
 
     //user schema
     var userSchema = mongoose.Schema({
-        username:   String,
-        password:   String
+			username: {type: String, required: true, index: { unique: true }},
+			password: {type: String, required: true},
+			email: {type: String, required: true},
+			registered: {type: Boolean, default: false},
+			created: {type: Date, default: Date.now}
     });
 
     userSchema.methods.validPassword = function (password) {
-        console.log( this.password === password );
-        return this.password === password;
+      return this.password === password;
     };
 
     //playerlist schema
