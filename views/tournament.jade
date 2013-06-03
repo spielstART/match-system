@@ -7,9 +7,23 @@ block content
   if !playerlist
     p no players yet!
   else
-    ul
-      for player in playerlist
-        li= player.players[0].username
+    - var number = 0;
+    div.well
+        table.table
+            thead
+                tr
+                    th #
+                    th Username
+                    th E-Mail
+
+            tbody
+                for entry in playerlist
+                    - number++;
+                    tr
+                        td= number
+                        td= entry.player.username
+                        td= entry.player.email
+
 
 
 

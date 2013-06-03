@@ -12,7 +12,9 @@ exports.index = function(req, res){
 
 //get
 exports.tournament = function(req, res) {
-    db.PlayerList.find(function(err, playerlist) {
+    var query = db.PlayerList.find();
+    query.populate('player', 'username email');
+    query.exec(function(err, playerlist) {
         if (err) {
             throw err;
         }
@@ -28,12 +30,12 @@ exports.tournament = function(req, res) {
 
 //post
 exports.enterTournament = function(req, res) {
-	db.PlayerList.find({"players.username": req.user.username}, function(err, user){
+	db.PlayerList.find({player: req.user._id}, function(err, user){
 		if(err)
 			throw err;
 		else if (user[0] === undefined){
-			var Bomberman = new db.PlayerList({players: req.user});
-			Bomberman.save(function (err) {
+			var tournament = new db.PlayerList({player: req.user._id});
+            tournament.save(function (err) {
 				if (err) {
            throw err;
 				}
@@ -50,7 +52,7 @@ exports.enterTournament = function(req, res) {
 
 //post
 exports.leaveTournament = function(req, res) {
-    db.PlayerList.find({"players.username": req.user.username}, function(err, user) {
+    db.PlayerList.find({player: req.user._id}, function(err, user) {
         if (err) {
             throw err;
         } else if (user[0] === undefined) {

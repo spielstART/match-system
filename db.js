@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-
+var Schema  = mongoose.Schema;
 
 //database connection
 mongoose.connect('mongodb://localhost/test');
@@ -23,7 +23,7 @@ db.once('open', function callback () {
 
     //playerlist schema
     var playerlistSchema = mongoose.Schema({
-       players: [userSchema]
+       player: { type: Schema.Types.ObjectId, ref: 'User' }
     });
 
     //models
