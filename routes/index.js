@@ -65,4 +65,9 @@ exports.leaveTournament = function(req, res) {
             res.redirect('/tournament');
         }
     });
+}
+
+//get
+exports.bracket = function(req, res) {
+    res.render('bracket', { title: 'Match-System', user: req.user});
 };

@@ -83,6 +83,7 @@ currentUser = function (req, res, next)
 app.get('/', currentUser, routes.index);
 app.get('/users', currentUser, user.list);
 app.get('/tournament', currentUser, routes.tournament);
+app.get('/tournament/bracket', currentUser, routes.bracket);
 app.get('/user/signup', currentUser, user.signup);
 app.get('/user/signin', currentUser, user.signin);
 app.get('/user/logout', currentUser, function(req, res){req.logout(); res.redirect('back');});
