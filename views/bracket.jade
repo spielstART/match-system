@@ -4,14 +4,7 @@ block content
   h3 Welcome to #{title}
 
   div.row
-    - for (var i = 1; i <= 4; ++i) {
-    div.span3
-      p
-        a(href="#").thumbnail
-          img(alt="260x180",style="width: 260px; height: 180px;",src="http://placehold.it/260x180&text=User #{i}")
-    - }
-  div.row
-    - for (var i = 1; i <= 4; ++i) {
+    - for (var i = 1; i <= 8; ++i) {
     div.span3
       p
         a(href="#").thumbnail
