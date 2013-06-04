@@ -20,21 +20,22 @@ html
           div.nav-collapse.collapse
             ul.nav
               li
-                a(href='/user/signup') Sign up
-              li
-                a(href='/user/signin') Sign in
-              li
                 a(href='/users') Userlist
               li
                 a(href='/tournament') Tournament
             ul.nav.pull-right
-              li
-                if currentUser.username
-                  h6 logged in as <em>#{currentUser.username}</em>
-                else
-                  h6 not logged in
-              li
-                a(href='/user/logout') Logout
+              if currentUser.username
+                li.dropdown
+                  a(href="#", data-toggle="dropdown").dropdown-toggle #{currentUser.username}
+                    b.caret
+                  ul.dropdown-menu
+                    li
+                      a(href='/user/logout') Logout
+              else
+                li
+                  a(href='/user/signup') Sign up
+                li
+                  a(href='/user/signin') Sign in
     div.container
       div.hero-unit
         block content
