@@ -1,11 +1,14 @@
 extends layout
 
 block content
-  h3 Welcome to #{title}
-  a(href='/user/signup') Signup
-  br
-  a(href='/user/login') Login
-  br
-  a(href='/users') Userlist
-  br
-  a(href='/tournament') Tournament
+  div.page-header
+    h1 Welcome to #{title}
+  ul
+    li
+      a(href='/user/signup') Signup
+    li
+      a(href='/user/login') Login
+    li
+      a(href='/users') Userlist
+    li
+      a(href='/tournament') Tournament
