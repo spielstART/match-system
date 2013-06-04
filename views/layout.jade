@@ -21,8 +21,9 @@ html
             ul.nav
               li
                 a(href='/users') Userlist
-              li
-                a(href='/tournament') Tournament
+              if currentUser.username
+                li
+                  a(href='/tournament') Tournament
             ul.nav.pull-right
               if currentUser.username
                 li.dropdown
