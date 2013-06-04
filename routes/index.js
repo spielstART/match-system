@@ -22,7 +22,7 @@ exports.tournament = function(req, res) {
         if(req.user) {
             res.render('tournament', {title: 'Tournament', playerlist: playerlist, user: req.user});
         } else {
-            res.redirect('/');
+            res.redirect('/user/signin');
         }
         console.log(playerlist);
     });
