@@ -1,23 +1,22 @@
 extends layout
 
 block content
-	h1= title
-	br
-	p List of all registered Users
-	- var number = 0;
-	div.well
-		table.table
-			thead
-				tr
-					th #
-					th Username
-					th E-Mail
-					th created at
-			tbody
-				for user in users
-					- number++;
-					tr
-						td= number
-						td= user.username
-						td= user.email
-						td= user.created
+  div.page-header
+    h1= title
+  p.well List of all registered users.
+  - var number = 0;
+  table.table
+    thead
+      tr
+        th #
+        th Username
+        th E-Mail
+        th Creation date
+    tbody
+      for user in users
+        - number++;
+        tr
+          td= number
+          td= user.username
+          td= user.email
+          td= user.created.toDateString()
