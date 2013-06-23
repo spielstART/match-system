@@ -17,7 +17,7 @@ for(var i = 0; i < 20; i++) {
 
 for(var j = 0; j < 5; j++) {
     var tournament = new models.Tournament({
-        title: Faker.Lorem.words()
+        title: Faker.Name.firstName()
     });
 
     tournament.save();
