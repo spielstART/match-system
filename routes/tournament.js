@@ -7,7 +7,10 @@ exports.tournamentList = function(req, res) {
     if (err) {
       throw err;
     } else {
-      res.render('tournamentList', {title: 'Tournaments', tournaments: tournament});
+      res.render('tournamentList', {
+        title: 'Tournament list',
+        tournaments: tournament
+      });
     }
   });
 };
