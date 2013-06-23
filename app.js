@@ -1,7 +1,5 @@
 // Module dependencies.
 var express = require('express'),
-routes = require('./routes'),
-user = require('./routes/user'),
 http = require('http'),
 path = require('path'),
 db = require('./db'),
@@ -75,25 +73,25 @@ currentUser = function (req, res, next) {
   next();
 };
 
+// routes
+var routes = require('./routes'),
+routesUser = require('./routes/user'),
+routesTournament = require('./routes/tournament');
 
-// Get Requests
 app.get('/', currentUser, routes.index);
-app.get('/users', currentUser, user.list);
-app.get('/tournament/:id', currentUser, routes.tournament);
-app.get('/tournamentlist', currentUser, routes.tournamentlist);
-app.get('/tournament/bracket', currentUser, routes.bracket);
-app.get('/user/signup', currentUser, user.signup);
-app.get('/user/signin', currentUser, user.signin);
+app.get('/users', currentUser, routesUser.list);
+app.get('/tournament/:id', currentUser, routesTournament.tournament);
+app.get('/tournamentlist', currentUser, routesTournament.tournamentlist);
+app.get('/tournament/bracket', currentUser, routesTournament.bracket);
+app.get('/user/signup', currentUser, routesUser.signup);
+app.get('/user/signin', currentUser, routesUser.signin);
 app.get('/user/logout', currentUser, function(req, res){req.logout(); res.redirect('back');});
-app.get('/user/activationmail', currentUser, user.activationmail);
-app.get('/user/activate_user/:id', currentUser, user.activateuser);
+app.get('/user/activationmail', currentUser, routesUser.activationmail);
+app.get('/user/activate_user/:id', currentUser, routesUser.activateuser);
 
-
-
-// Post Requests
-app.post('/user/register', user.register);
-app.post('/enterTournament', routes.enterTournament);
-app.post('/leaveTournament', routes.leaveTournament);
+app.post('/user/register', routesUser.register);
+app.post('/enterTournament', routesTournament.enterTournament);
+app.post('/leaveTournament', routesTournament.leaveTournament);
 app.post('/user/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/user/signin',
