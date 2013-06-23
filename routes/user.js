@@ -3,7 +3,7 @@ var mailer = require("../mailer");
 var async = require("async");
 
 /*
- * GET 
+ * GET
  */
 
 exports.list = function(req, res){
@@ -37,8 +37,8 @@ exports.activationmail = function(req, res){
 
 
 exports.activateuser = function(req, res){
-	
-	
+
+
 	db.User.update({_id: req.params.id}, { $set: { registered: true}}, function(err){
 	if (err) throw err;
 	else
@@ -50,12 +50,12 @@ exports.activateuser = function(req, res){
 }
 
 /*
- * POST 
+ * POST
  */
 
 exports.register = function(req, res){
 
-	if( req.body.username === '' || req.body.password === '' || req.body.email === '')	
+	if( req.body.username === '' || req.body.password === '' || req.body.email === '')
 	{
 		req.flash('error', 'Missing credentials');
 		res.redirect('back');
@@ -63,16 +63,16 @@ exports.register = function(req, res){
 	else
 	{
 		var query = db.User.where('username').equals(req.body.username);
-		
+
 		query.exec(function (err, quser){
-			
+
 			if (err)
 				throw err
 			else if (quser[0] === undefined)
 			{
-				
-			
-				var user = new db.User({ 
+
+
+				var user = new db.User({
 					username: req.body.username,
 					password: req.body.password,
 					email: req.body.email});
@@ -93,11 +93,11 @@ exports.register = function(req, res){
 						function(callback){
 							db.User.findOne({ username: req.body.username }, function(err, user){
 								if (err) throw err;
-								
+
 									console.log(user)
 									callback(null, user._id);
 								});
-						
+
 							},
 							function(id, callback){
 								var mailbody = "<h2>Welcome to Match-System</h2></br></br><a href='http://localhost:3000/user/activate_user/" + id +"'>Activation Link</a>";
