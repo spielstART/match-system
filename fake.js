@@ -15,5 +15,12 @@ for(var i = 0; i < 20; i++) {
     user.save();
 }
 
+for(var j = 0; j < 5; j++) {
+    var tournament = new models.Tournament({
+        title: Faker.Lorem.words()
+    });
+
+    tournament.save();
+}
 
 db.db.close();
