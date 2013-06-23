@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema  = mongoose.Schema;
 
 //database connection
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/matchsystem');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
