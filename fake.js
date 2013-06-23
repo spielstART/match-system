@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 
 for(var i = 0; i < 20; i++) {
     var user = new models.User({
-        username: Faker.Name.findName(),
+        username: Faker.Internet.userName(),
         password: '123',
         email: Faker.Internet.email(),
         registered: true
