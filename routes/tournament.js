@@ -33,7 +33,7 @@ exports.tournamentDetail = function(req, res) {
 };
 
 exports.tournamentEnter = function(req, res) {
-  models.PlayerList.find({player: req.user._id}, function(err, user){
+  models.PlayerList.find({player: req.user._id}, function(err, user) {
     if(err) {
       throw err;
     } else if (user[0] === undefined){
@@ -43,11 +43,11 @@ exports.tournamentEnter = function(req, res) {
           throw err;
         }
         console.log(req.user.username + " enrolled in tournament!");
-        res.redirect('/tournament');
+        res.redirect('/tournament/list');
      });
     } else{
       console.log("user already in list");
-      res.redirect('/tournament');
+      res.redirect('/tournament/list');
     }
   });
 };
@@ -58,11 +58,11 @@ exports.tournamentLeave = function(req, res) {
       throw err;
     } else if (user[0] === undefined) {
       console.log("user not in list");
-      res.redirect('/tournament');
+      res.redirect('/tournament/list');
     } else {
       user[0].remove(function (err){if (err) throw err;});
       console.log(req.user.username + " left the tournament!");
-      res.redirect('/tournament');
+      res.redirect('/tournament/list');
     }
   });
 };
