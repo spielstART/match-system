@@ -1,37 +1,34 @@
+// Module dependencies.
+var express = require('express'),
+routes = require('./routes'),
+user = require('./routes/user'),
+http = require('http'),
+path = require('path'),
+db = require('./db'),
+passport = require('passport'),
+LocalStrategy = require('passport-local').Strategy,
+flash = require('connect-flash');
 
-/**
- * Module dependencies.
- */
-
-var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , http = require('http')
-  , path = require('path')
-	, db = require('./db')
-	, passport = require('passport')
-	, LocalStrategy = require('passport-local').Strategy
-	,	flash = require('connect-flash');
 
 // PASSPORT SETUP
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    db.User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
-			if (user) {
-				if (user.registered === false){
-					return done(null, false, { message: 'User not activated. Check your e-mail' });
-				}
-			}
-			if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+  db.User.findOne({ username: username }, function (err, user) {
+    if (err) { return done(err); }
+    if (user) {
+      if (user.registered === false){
+        return done(null, false, { message: 'User not activated. Check your e-mail' });
       }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
+    }
+    if (!user) {
+      return done(null, false, { message: 'Incorrect username.' });
+    }
+    if (!user.validPassword(password)) {
+      return done(null, false, { message: 'Incorrect password.' });
+    }
+    return done(null, user);
+  });
+}
 ));
 
 passport.serializeUser(function(user, done) {
@@ -44,24 +41,26 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-// EXPRESS SETUP
 
+// EXPRESS SETUP
 var app = express();
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
+
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
-	app.use(passport.initialize());
-  app.use(passport.session());
-	app.use(flash());
-	app.use(app.router);
+app.use(express.cookieParser('your secret here'));
+app.use(express.session());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
@@ -69,13 +68,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-currentUser = function (req, res, next)
-{
-	if (req.user !== undefined)
-	{
-		res.locals.currentUser = req.user;
-	}
-	next();
+currentUser = function (req, res, next) {
+  if (req.user !== undefined) {
+    res.locals.currentUser = req.user;
+  }
+  next();
 }
 
 
@@ -100,10 +97,10 @@ app.post('/user/register', user.register);
 app.post('/enterTournament', routes.enterTournament);
 app.post('/leaveTournament', routes.leaveTournament);
 app.post('/user/login', passport.authenticate('local', { successRedirect: '/',
-																												 failureRedirect: '/user/signin',
-																												 failureFlash: true }));
+                                              failureRedirect: '/user/signin',
+                                              failureFlash: true }));
 
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+                                              http.createServer(app).listen(app.get('port'), function(){
+                                                console.log('Express server listening on port ' + app.get('port'));
+                                              });
