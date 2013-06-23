@@ -1,35 +1,33 @@
 extends layout
 
 block content
-  h3 Welcome to #{title}
+  div.page-header
+    A tournament (title missing...)
 
 
   if !playerlist
     p no players yet!
   else
-    - var number = 0;
     div.well
-        table.table
-            thead
-                tr
-                    th #
-                    th Username
-                    th E-Mail
-
-            tbody
-                for entry in playerlist
-                    - number++;
-                    tr
-                        td= number
-                        td babedi bubedi
-                        td bibedie babedi
+      table.table
+        thead
+          tr
+            th #
+            th Username
+            th E-Mail
+        tbody
+          for entry, number in playerlist
+            tr
+              td= number
+              td babedi bubedi
+              td bibedie babedi
 
 
 
 
-  form(action='/enterTournament', method='post')
+  form(action='/tournament/#{tournamentId}/enter', method='post')
     input(type='submit', value='Enter Tournament').btn
-  form(action='/leaveTournament', method='post')
+  form(action='/tournament/#{tournamentId}/leave', method='post')
     input(type='submit', value='Leave Tournament').btn
 
   br

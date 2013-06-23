@@ -24,7 +24,7 @@ exports.tournamentDetail = function(req, res) {
     }
 
     if(req.user) {
-      res.render('tournamentDetail', {title: 'Tournament', playerlist: playerlist, user: req.user});
+      res.render('tournamentDetail', {title: 'Tournament', playerlist: playerlist, tournamentId: req.params['id'], user: req.user});
     } else {
       res.redirect('/user/signin');
     }
