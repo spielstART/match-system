@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var Schema  = mongoose.Schema;
 
 //database connection
 mongoose.connect('mongodb://localhost/matchsystem');
@@ -33,7 +32,7 @@ db.once('open', function callback () {
 
     // playerlist Schema
     var playerlistSchema = mongoose.Schema({
-        players: [ {type: Schema.Types.ObjectId, ref: 'Player'} ],
+        players: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Player'} ],
         round: { type: String },
         group: { type: String }
     });
@@ -47,8 +46,8 @@ db.once('open', function callback () {
 
     // player Schema
     var playerSchema = mongoose.Schema({
-        player: { type: Schema.Types.ObjectId, ref: 'User' },
-        tournament: { type: Schema.Types.ObjectId, ref: 'Tournament'},
+        player: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        tournament: { type: mongoose.Schema.Types.ObjectId, ref: 'Tournament'},
         score: { type: Number }
     });
 
