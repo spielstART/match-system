@@ -75,29 +75,29 @@ currentUser = function (req, res, next) {
 };
 
 // routes
-var routes = require('./routes'),
-routesUser = require('./routes/user'),
-routesTournament = require('./routes/tournament');
-
+var routes = require('./routes');
 app.get('/', currentUser, routes.index);
+
+var routesUser = require('./routes/user');
 app.get('/users', currentUser, routesUser.list);
-app.get('/tournament/:id', currentUser, routesTournament.tournament);
-app.get('/tournament/list', currentUser, routesTournament.tournamentlist);
-app.get('/tournament/bracket', currentUser, routesTournament.bracket);
 app.get('/user/signup', currentUser, routesUser.signup);
 app.get('/user/signin', currentUser, routesUser.signin);
 app.get('/user/logout', currentUser, routesUser.signout);
 app.get('/user/activationmail', currentUser, routesUser.activationmail);
 app.get('/user/activate_user/:id', currentUser, routesUser.activateuser);
-
 app.post('/user/register', routesUser.register);
-app.post('/enterTournament', routesTournament.enterTournament);
-app.post('/leaveTournament', routesTournament.leaveTournament);
 app.post('/user/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/user/signin',
   failureFlash: true
 }));
+
+var routesTournament = require('./routes/tournament');
+app.get('/tournament/:id', currentUser, routesTournament.tournament);
+app.get('/tournament/list', currentUser, routesTournament.tournamentlist);
+app.get('/tournament/bracket', currentUser, routesTournament.bracket);
+app.post('/enterTournament', routesTournament.enterTournament);
+app.post('/leaveTournament', routesTournament.leaveTournament);
 
 
 http.createServer(app).listen(app.get('port'), function(){
