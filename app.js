@@ -82,13 +82,16 @@ currentUser = function (req, res, next)
 // Get Requests
 app.get('/', currentUser, routes.index);
 app.get('/users', currentUser, user.list);
-app.get('/tournament', currentUser, routes.tournament);
+//app.get('/tournament', currentUser, routes.tournament);
+app.get('/tournament/:id', currentUser, routes.tournament);
+app.get('/tournamentlist', currentUser, routes.tournamentlist);
 app.get('/tournament/bracket', currentUser, routes.bracket);
 app.get('/user/signup', currentUser, user.signup);
 app.get('/user/signin', currentUser, user.signin);
 app.get('/user/logout', currentUser, function(req, res){req.logout(); res.redirect('back');});
 app.get('/user/activationmail', currentUser, user.activationmail);
 app.get('/user/activate_user/:id', currentUser, user.activateuser);
+
 
 
 // Post Requests

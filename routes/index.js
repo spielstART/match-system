@@ -3,6 +3,7 @@
  * GET home page.
  */
 var db = require('../db');
+var async = require("async");
 
 //get
 exports.index = function(req, res){
@@ -11,6 +12,34 @@ exports.index = function(req, res){
 };
 
 //get
+/*exports.tournament = function(req, res) {
+    var query = db.PlayerList.find();
+    query.populate('player', 'username email');
+    query.exec(function(err, playerlist) {
+        if (err) {
+            throw err;
+        }
+
+        if(req.user) {
+            res.render('tournament', {title: 'Tournament', playerlist: playerlist, user: req.user});
+        } else {
+            res.redirect('/user/signin');
+        }
+        console.log(playerlist);
+    });
+};*/
+exports.tournamentlist = function(req, res) {
+    db.Tournament.find().exec(function(err, tournament) {
+        if (err) {
+            throw err;
+        }
+        else {
+            res.render('tournamentlist', {title: 'Tournaments', tournaments: tournament});
+        }
+    });
+
+};
+
 exports.tournament = function(req, res) {
     var query = db.PlayerList.find();
     query.populate('player', 'username email');
@@ -68,6 +97,54 @@ exports.leaveTournament = function(req, res) {
 }
 
 //get
-exports.bracket = function(req, res) {
+exports.bracket = function (req, res) {
     res.render('bracket', { title: 'Match-System', user: req.user});
+    //var groupSize = db.PlayerList.player.length;
+    //console.log("GroupSize" + groupSize);
+    //
+
+    var bracketQuery = db.PlayerList.find();
+    bracketQuery.select('user');
+    bracketQuery.exec(function(err, user){
+        if (err){
+            throw err;
+        } else {
+            //return user;
+            console.log(user);
+            var bracketUser = user;
+            console.log(bracketUser);
+        }
+    });
+
+    var round = 1;
+    if (placement == "winner") {
+        round = round++;
+        nextBracket.push(user);
+        console.log(round);
+    } else {
+        console.log(user + "lost the round and will be kicked");
+    }
+
+    var bracketSize;
+    for(var one = 0, two = 1; one <= 7; one+=2, two+=2){
+        console.log("one" + one);
+        console.log("two" + two);
+
+        /*
+        async.parallel([
+        function(user){
+            //code
+        },
+        function(){
+            //code
+        }
+        ], callback("testBracket"))
+        */
+        //var bracketSize = db.PlayerList.player["user"];
+        //var bracketSize = bracketSize.length;
+        //console.log("BracketSize" + bracketSize);
+        /*for(var group = 0; group <= bracketSize; group++){
+            db.bracket.save(groupMembers);
+        };*/
+    };
 };
