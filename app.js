@@ -96,11 +96,13 @@ app.get('/user/activate_user/:id', currentUser, user.activateuser);
 app.post('/user/register', user.register);
 app.post('/enterTournament', routes.enterTournament);
 app.post('/leaveTournament', routes.leaveTournament);
-app.post('/user/login', passport.authenticate('local', { successRedirect: '/',
-                                              failureRedirect: '/user/signin',
-                                              failureFlash: true }));
+app.post('/user/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/user/signin',
+  failureFlash: true
+}));
 
 
-                                              http.createServer(app).listen(app.get('port'), function(){
-                                                console.log('Express server listening on port ' + app.get('port'));
-                                              });
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+});
