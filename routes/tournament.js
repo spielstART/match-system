@@ -1,18 +1,18 @@
 var models = require('../models');
 var async = require("async");
 
-//get
-exports.tournamentlist = function(req, res) {
+
+exports.tournamentList = function(req, res) {
   models.Tournament.find().exec(function(err, tournament) {
     if (err) {
       throw err;
     } else {
-      res.render('tournamentlist', {title: 'Tournaments', tournaments: tournament});
+      res.render('tournament/list', {title: 'Tournaments', tournaments: tournament});
     }
   });
 };
 
-exports.tournament = function(req, res) {
+exports.tournamentDetail = function(req, res) {
   var query = models.PlayerList.find();
   query.populate('player', 'username email');
   query.exec(function(err, playerlist) {
@@ -29,8 +29,7 @@ exports.tournament = function(req, res) {
   });
 };
 
-//post
-exports.enterTournament = function(req, res) {
+exports.tournamentEnter = function(req, res) {
   models.PlayerList.find({player: req.user._id}, function(err, user){
     if(err) {
       throw err;
@@ -50,8 +49,7 @@ exports.enterTournament = function(req, res) {
   });
 };
 
-//post
-exports.leaveTournament = function(req, res) {
+exports.tournamentLeave = function(req, res) {
   models.PlayerList.find({player: req.user._id}, function(err, user) {
     if (err) {
       throw err;
@@ -64,36 +62,4 @@ exports.leaveTournament = function(req, res) {
       res.redirect('/tournament');
     }
   });
-};
-
-//get
-exports.bracket = function (req, res) {
-  res.render('bracket', { title: 'Match-System', user: req.user});
-
-  var bracketQuery = models.PlayerList.find();
-  bracketQuery.select('user');
-  bracketQuery.exec(function(err, user){
-    if (err){
-      throw err;
-    } else {
-      console.log(user);
-      var bracketUser = user;
-      console.log(bracketUser);
-    }
-  });
-
-  var round = 1;
-  if (placement == "winner") {
-    round = round++;
-    nextBracket.push(user);
-    console.log(round);
-  } else {
-    console.log(user + "lost the round and will be kicked");
-  }
-
-  var bracketSize;
-  for(var one = 0, two = 1; one <= 7; one+=2, two+=2) {
-    console.log("one" + one);
-    console.log("two" + two);
-  }
 };
