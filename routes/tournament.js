@@ -7,7 +7,7 @@ exports.tournamentList = function(req, res) {
     if (err) {
       throw err;
     } else {
-      res.render('tournament/list', {title: 'Tournaments', tournaments: tournament});
+      res.render('tournamentList', {title: 'Tournaments', tournaments: tournament});
     }
   });
 };
@@ -21,7 +21,7 @@ exports.tournamentDetail = function(req, res) {
     }
 
     if(req.user) {
-      res.render('tournament', {title: 'Tournament', playerlist: playerlist, user: req.user});
+      res.render('tournamentDetail', {title: 'Tournament', playerlist: playerlist, user: req.user});
     } else {
       res.redirect('/user/signin');
     }
