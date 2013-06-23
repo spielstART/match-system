@@ -14,7 +14,8 @@ db.once('open', function callback () {
 			password: {type: String, required: true},
 			email: {type: String, required: true},
 			registered: {type: Boolean, default: false},
-			created: {type: Date, default: Date.now}
+			created: {type: Date, default: Date.now},
+            role: { type: String, default: 'user' }
     });
 
     userSchema.methods.validPassword = function (password) {
