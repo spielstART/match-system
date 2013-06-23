@@ -21,6 +21,11 @@ exports.list = function(req, res){
 
 };
 
+exports.signout = function(req, res) {
+	req.logout();
+	res.redirect('/');
+};
+
 exports.signup = function(req, res){
 	res.render('signup', { title: "Sign up", message: req.flash('error')});
 };

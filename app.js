@@ -85,7 +85,7 @@ app.get('/tournamentlist', currentUser, routesTournament.tournamentlist);
 app.get('/tournament/bracket', currentUser, routesTournament.bracket);
 app.get('/user/signup', currentUser, routesUser.signup);
 app.get('/user/signin', currentUser, routesUser.signin);
-app.get('/user/logout', currentUser, function(req, res){req.logout(); res.redirect('back');});
+app.get('/user/logout', currentUser, routesUser.signout);
 app.get('/user/activationmail', currentUser, routesUser.activationmail);
 app.get('/user/activate_user/:id', currentUser, routesUser.activateuser);
 
