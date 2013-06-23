@@ -9,6 +9,8 @@ var async = require("async");
 exports.index = function(req, res){
     res.render('index', { title: 'Match-System', user: req.user});
     console.log(req.user);
+    if(req.user !== undefined)
+        console.log(req.user.role);
 };
 
 //get
