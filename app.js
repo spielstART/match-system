@@ -81,7 +81,7 @@ routesTournament = require('./routes/tournament');
 app.get('/', currentUser, routes.index);
 app.get('/users', currentUser, routesUser.list);
 app.get('/tournament/:id', currentUser, routesTournament.tournament);
-app.get('/tournamentlist', currentUser, routesTournament.tournamentlist);
+app.get('/tournament/list', currentUser, routesTournament.tournamentlist);
 app.get('/tournament/bracket', currentUser, routesTournament.bracket);
 app.get('/user/signup', currentUser, routesUser.signup);
 app.get('/user/signin', currentUser, routesUser.signin);
