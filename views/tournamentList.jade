@@ -13,6 +13,6 @@ block content
           div.thumbnail
             img(src='http://placehold.it/260x130', style='margin-right: 10px;')
             h4 #{entry.title}
-              small  Open for enrollment
-                | #{entry.enroll}
+              if entry.open
+                small  Open for enrollment
             a(href='/tournament/' + entry._id).btn Details
