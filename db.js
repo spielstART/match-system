@@ -21,15 +21,6 @@ db.once('open', function callback () {
       return this.password === password;
     };
 
-    // playerlist schema
-    /*var playerlistSchema = mongoose.Schema({
-       player: { type: Schema.Types.ObjectId, ref: 'User' }
-    });*/
-    //bracket schema
-    /*var bracketSchema = mongoose.Schema({
-     bracket: { type: Schema.Types.ObjectId, ref: 'User'}
-     });*/
-
     // playerlist Schema
     var playerlistSchema = mongoose.Schema({
         players: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Player'} ],
@@ -51,25 +42,16 @@ db.once('open', function callback () {
         score: { type: Number }
     });
 
-
-
     //models
     var User = mongoose.model('User', userSchema);
     var PlayerList = mongoose.model('PlayerList', playerlistSchema);
-    //var Bracket = mongoose.model('Bracket', bracketSchema);
     var Player = mongoose.model('Player', playerSchema);
     var Tournament = mongoose.model('Tournament', tournamentSchema);
-
-    /*var bomberman = new Tournament({
-        title: 'Bomberman'
-    });
-    bomberman.save();*/
 
     exports.User = User;
     exports.PlayerList = PlayerList;
     exports.Tournament = Tournament;
     exports.Player = Player;
-
 });
 
 exports.db = db;
