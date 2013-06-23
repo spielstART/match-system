@@ -3,6 +3,7 @@ var express = require('express'),
 http = require('http'),
 path = require('path'),
 db = require('./db'),
+models = require('./models'),
 passport = require('passport'),
 LocalStrategy = require('passport-local').Strategy,
 flash = require('connect-flash');
@@ -11,7 +12,7 @@ flash = require('connect-flash');
 // PASSPORT SETUP
 passport.use(new LocalStrategy(
   function(username, password, done) {
-  db.User.findOne({ username: username }, function (err, user) {
+  models.User.findOne({ username: username }, function (err, user) {
     if (err) { return done(err); }
     if (user) {
       if (user.registered === false){
@@ -34,7 +35,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  db.User.findById(id, function(err, user) {
+  models.User.findById(id, function(err, user) {
     done(err, user);
   });
 });

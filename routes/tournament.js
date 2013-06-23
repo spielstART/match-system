@@ -1,9 +1,9 @@
-var db = require('../db');
+var models = require('../models');
 var async = require("async");
 
 //get
 exports.tournamentlist = function(req, res) {
-  db.Tournament.find().exec(function(err, tournament) {
+  models.Tournament.find().exec(function(err, tournament) {
     if (err) {
       throw err;
     } else {
@@ -13,7 +13,7 @@ exports.tournamentlist = function(req, res) {
 };
 
 exports.tournament = function(req, res) {
-  var query = db.PlayerList.find();
+  var query = models.PlayerList.find();
   query.populate('player', 'username email');
   query.exec(function(err, playerlist) {
     if (err) {
@@ -31,11 +31,11 @@ exports.tournament = function(req, res) {
 
 //post
 exports.enterTournament = function(req, res) {
-  db.PlayerList.find({player: req.user._id}, function(err, user){
+  models.PlayerList.find({player: req.user._id}, function(err, user){
     if(err) {
       throw err;
     } else if (user[0] === undefined){
-      var tournament = new db.PlayerList({player: req.user._id});
+      var tournament = new models.PlayerList({player: req.user._id});
       tournament.save(function (err) {
         if (err) {
           throw err;
@@ -52,7 +52,7 @@ exports.enterTournament = function(req, res) {
 
 //post
 exports.leaveTournament = function(req, res) {
-  db.PlayerList.find({player: req.user._id}, function(err, user) {
+  models.PlayerList.find({player: req.user._id}, function(err, user) {
     if (err) {
       throw err;
     } else if (user[0] === undefined) {
@@ -70,7 +70,7 @@ exports.leaveTournament = function(req, res) {
 exports.bracket = function (req, res) {
   res.render('bracket', { title: 'Match-System', user: req.user});
 
-  var bracketQuery = db.PlayerList.find();
+  var bracketQuery = models.PlayerList.find();
   bracketQuery.select('user');
   bracketQuery.exec(function(err, user){
     if (err){

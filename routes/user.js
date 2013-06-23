@@ -1,10 +1,10 @@
-var db = require("../db");
+var models = require("../models");
 var mailer = require("../mailer");
 var async = require("async");
 
 
 exports.list = function(req, res) {
-  var query = db.User.find();
+  var query = models.User.find();
 
   query.select('username email created');
 
@@ -43,7 +43,7 @@ exports.activationmail = function(req, res) {
 };
 
 exports.activateuser = function(req, res) {
-  db.User.update({_id: req.params.id}, { $set: { registered: true}}, function(err) {
+  models.User.update({_id: req.params.id}, { $set: { registered: true}}, function(err) {
     if (err) {
       throw err;
     } else {
@@ -60,13 +60,13 @@ exports.register = function(req, res) {
     req.flash('error', 'Missing credentials');
     res.redirect('back');
   } else {
-    var query = db.User.where('username').equals(req.body.username);
+    var query = models.User.where('username').equals(req.body.username);
 
     query.exec(function (err, quser) {
       if (err) {
         throw err;
       } else if (quser[0] === undefined) {
-        var user = new db.User({
+        var user = new models.User({
           username: req.body.username,
           password: req.body.password,
           email: req.body.email
@@ -87,7 +87,7 @@ exports.register = function(req, res) {
           function (callback) {
             async.waterfall([
               function(callback) {
-                db.User.findOne({ username: req.body.username }, function(err, user) {
+                models.User.findOne({ username: req.body.username }, function(err, user) {
                   if (err) {
                     throw err;
                   }
