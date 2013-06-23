@@ -23,8 +23,7 @@ var playerlistSchema = mongoose.Schema({
 
 // tournament Schema
 var tournamentSchema = mongoose.Schema({
-  title: { type: String, required: true, index: { unique: true}},
-  enroll: { type: Boolean, default: true }
+  title: {type: String, required: true, index: { unique: true}}
 });
 
 // player Schema
