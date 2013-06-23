@@ -22,11 +22,11 @@ exports.list = function(req, res){
 };
 
 exports.signup = function(req, res){
-	res.render('signup', { title: "SignUp", message: req.flash('error')});
+	res.render('signup', { title: "Sign up", message: req.flash('error')});
 };
 
 exports.signin = function(req, res){
-	res.render('signin', { title: "SignIn", message: req.flash('error')});
+	res.render('signin', { title: "Sign in", message: req.flash('error')});
 	console.log(req.flash('error'));
 };
 
