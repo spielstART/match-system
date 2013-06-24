@@ -15,6 +15,21 @@ exports.tournamentList = function(req, res) {
   });
 };
 
+exports.tournamentCreate = function(req, res) {
+  if(req.method == 'POST') {
+    var tournament = new models.Tournament({
+      title: req.body.title,
+      open: true
+    });
+    tournament.save();
+    res.redirect('/tournament/list');
+  } else {
+    res.render('tournamentCreate', {
+      title: 'Create tournament'
+    });
+  }
+};
+
 exports.tournamentDetail = function(req, res) {
   var query = models.PlayerList.find();
   query.populate('player', 'username email');

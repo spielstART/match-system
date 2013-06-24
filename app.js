@@ -94,6 +94,8 @@ app.post('/user/login', passport.authenticate('local', {
 
 var routesTournament = require('./routes/tournament');
 app.get('/tournament/list', currentUser, routesTournament.tournamentList);
+app.get('/tournament/create', currentUser, routesTournament.tournamentCreate);
+app.post('/tournament/create', currentUser, routesTournament.tournamentCreate);
 app.get('/tournament/:id', currentUser, routesTournament.tournamentDetail);
 app.post('/tournament/:id/enter', routesTournament.tournamentEnter);
 app.post('/tournament/:id/leave', routesTournament.tournamentLeave);
