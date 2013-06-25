@@ -29,6 +29,17 @@ var tournamentSchema = mongoose.Schema({
   users: [{type: mongoose.Schema.Types.ObjectId, ref: 'User', index: {unique: true}}]
 });
 
+tournamentSchema.methods.userInTournament = function(user) {
+  var userInTournament = false;
+  for(var i = 0; i < this.users.length; i++) {
+    if(user._id.equals(this.users[i]._id)) {
+      userInTournament = true;
+      break;
+    }
+  }
+  return userInTournament;
+}
+
 // player Schema
 var playerSchema = mongoose.Schema({
   player: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
