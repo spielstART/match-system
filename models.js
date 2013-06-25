@@ -19,7 +19,7 @@ userSchema.methods.validPassword = function (password) {
 var playerlistSchema = mongoose.Schema({
   tournament: { type: mongoose.Schema.Types.ObjectId, ref: 'Tournament'},
   players: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Player'} ],
-  round: { type: String },
+  round: { type: Number },
   group: { type: String }
 });
 
