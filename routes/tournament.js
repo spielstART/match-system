@@ -35,9 +35,7 @@ exports.tournamentCreate = function(req, res) {
       });
     }
   } else {
-    res.render('tournamentCreate', {
-      title: 'Create tournament'
-    });
+    res.redirect('/user/signin');
   }
 };
 
