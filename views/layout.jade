@@ -2,14 +2,10 @@ doctype 5
 html
   head
     title=title
-    //link(rel='stylesheet', href='/stylesheets/style.css')
-    // Bootstrap
-    link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/bootstrap/css/bootstrap-responsive.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
+    link(rel='stylesheet', href='/css/style.css')
   body
-    script(src='/javascripts/jquery-1.10.0.min.js')
-    script(src='/bootstrap/js/bootstrap.min.js')
     div.navbar.navbar-fixed-top
       div.navbar-inner
         div.container
@@ -42,3 +38,5 @@ html
     div.container
       div.content
         block content
+    script(src='/js/jquery-1.10.0.min.js')
+    script(src='/js/bootstrap.min.js')
