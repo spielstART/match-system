@@ -25,4 +25,13 @@ for(var j = 0; j < 5; j++) {
     tournament.save();
 }
 
+var admin = new models.User({
+  username: "admin",
+  password: "123",
+  email: Faker.Internet.email(),
+  registered: true,
+  isAdmin: true
+});
+admin.save();
+
 db.db.close();
