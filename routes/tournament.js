@@ -31,19 +31,25 @@ exports.tournamentCreate = function(req, res) {
 };
 
 exports.tournamentDetail = function(req, res) {
-  var query = models.PlayerList.find();
-  query.populate('player', 'username email');
-  query.exec(function(err, playerlist) {
-    if (err) {
+  models.Tournament.findOne({_id: req.params.id}).exec(function(err, tournament) {
+    if(err) {
       throw err;
-    }
-
-    if(req.user) {
-      res.render('tournamentDetail', {title: 'Tournament', playerlist: playerlist, tournamentId: req.params['id'], user: req.user});
     } else {
-      res.redirect('/user/signin');
+      var query = models.PlayerList.find();
+      query.populate('player', 'username email');
+      query.exec(function(err, playerlist) {
+        if (err) {
+          throw err;
+        }
+
+        if(req.user) {
+          res.render('tournamentDetail', {title: 'Tournament - ' + tournament.title, playerlist: playerlist, tournament: tournament, user: req.user});
+        } else {
+          res.redirect('/user/signin');
+        }
+        console.log(playerlist);
+      });
     }
-    console.log(playerlist);
   });
 };
 

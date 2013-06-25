@@ -2,7 +2,7 @@ extends layout
 
 block content
   div.page-header
-    h1 A tournament (title missing...)
+    h1= title
 
 
   if !playerlist
@@ -25,9 +25,9 @@ block content
 
 
 
-  form(action='/tournament/#{tournamentId}/enter', method='post')
+  form(action='/tournament/#{tournament._id}/enter', method='post')
     input(type='submit', value='Enter Tournament').btn
-  form(action='/tournament/#{tournamentId}/leave', method='post')
+  form(action='/tournament/#{tournament._id}/leave', method='post')
     input(type='submit', value='Leave Tournament').btn
 
   br
