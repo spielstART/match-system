@@ -33,7 +33,11 @@ var tournamentSchema = mongoose.Schema({
 tournamentSchema.methods.userInTournament = function(user) {
   var userInTournament = false;
   for(var i = 0; i < this.users.length; i++) {
-    if(user._id.equals(this.users[i]._id)) {
+    var compareUserId = this.users[i]._id;
+    if(compareUserId == undefined) {
+      compareUserId = this.users[i];
+    }
+    if(user._id.equals(compareUserId)) {
       userInTournament = true;
       break;
     }
