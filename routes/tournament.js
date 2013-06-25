@@ -3,16 +3,20 @@ var async = require("async");
 
 
 exports.tournamentList = function(req, res) {
-  models.Tournament.find().exec(function(err, tournament) {
-    if (err) {
-      throw err;
-    } else {
-      res.render('tournamentList', {
-        title: 'Tournament list',
-        tournaments: tournament
-      });
-    }
-  });
+  if(req.user) {
+    models.Tournament.find().exec(function(err, tournament) {
+      if (err) {
+        throw err;
+      } else {
+        res.render('tournamentList', {
+          title: 'Tournament list',
+          tournaments: tournament
+        });
+      }
+    });
+  } else {
+    res.redirect('/user/signin');
+  }
 };
 
 exports.tournamentCreate = function(req, res) {
