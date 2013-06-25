@@ -64,22 +64,26 @@ exports.tournamentDetail = function(req, res) {
 };
 
 exports.tournamentEnter = function(req, res) {
-  models.Tournament.findOne({_id: req.params.id}, function(err, tournament) {
-    if(err) {
-      throw err;
-    } else {
-      if(tournament.userInTournament(req.user)) {
-        console.log('user is already in the tournament');
+  if(req.user) {
+    models.Tournament.findOne({_id: req.params.id}, function(err, tournament) {
+      if(err) {
+        throw err;
       } else {
-        models.Tournament.update({_id: req.params.id}, {$addToSet: {'users': req.user._id}}, function(err, data) {
-          if(err) {
-            throw err;
-          }
-        }).exec();
+        if(tournament.userInTournament(req.user)) {
+          console.log('user is already in the tournament');
+        } else {
+          models.Tournament.update({_id: req.params.id}, {$addToSet: {'users': req.user._id}}, function(err, data) {
+            if(err) {
+              throw err;
+            }
+          }).exec();
+        }
+        res.redirect('/tournament/'+req.params.id);
       }
-      res.redirect('/tournament/'+req.params.id);
-    }
-  });
+    });
+  } else {
+    res.redirect('/user/signin');
+  }
 };
 
 exports.tournamentLeave = function(req, res) {
