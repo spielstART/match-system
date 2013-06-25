@@ -16,6 +16,7 @@ userSchema.methods.validPassword = function (password) {
 
 // playerlist Schema
 var playerlistSchema = mongoose.Schema({
+  tournament: { type: mongoose.Schema.Types.ObjectId, ref: 'Tournament'},
   players: [ {type: mongoose.Schema.Types.ObjectId, ref: 'Player'} ],
   round: { type: String },
   group: { type: String }
@@ -31,7 +32,6 @@ var tournamentSchema = mongoose.Schema({
 // player Schema
 var playerSchema = mongoose.Schema({
   player: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  tournament: { type: mongoose.Schema.Types.ObjectId, ref: 'Tournament'},
   score: { type: Number }
 });
 
