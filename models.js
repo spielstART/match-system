@@ -24,7 +24,8 @@ var playerlistSchema = mongoose.Schema({
 // tournament Schema
 var tournamentSchema = mongoose.Schema({
   title: {type: String, required: true, index: { unique: true}},
-  open: {type: Boolean, default: true}
+  open: {type: Boolean, default: true},
+  users: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 // player Schema

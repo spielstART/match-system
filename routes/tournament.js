@@ -35,26 +35,17 @@ exports.tournamentCreate = function(req, res) {
 };
 
 exports.tournamentDetail = function(req, res) {
-  models.Tournament.findOne({_id: req.params.id}).exec(function(err, tournament) {
-    if(err) {
-      throw err;
-    } else {
-      var query = models.PlayerList.find();
-      query.populate('player', 'username email');
-      query.exec(function(err, playerlist) {
-        if (err) {
-          throw err;
-        }
-
-        if(req.user) {
-          res.render('tournamentDetail', {title: 'Tournament - ' + tournament.title, playerlist: playerlist, tournament: tournament, user: req.user});
-        } else {
-          res.redirect('/user/signin');
-        }
-        console.log(playerlist);
-      });
-    }
-  });
+  if(req.user) {
+    models.Tournament.findOne({_id: req.params.id}).exec(function(err, tournament) {
+      if(err) {
+        throw err;
+      } else {
+          res.render('tournamentDetail', {title: tournament.title, tournament: tournament, user: req.user});
+      }
+    });
+  } else {
+    res.redirect('/user/signin');
+  }
 };
 
 exports.tournamentEnter = function(req, res) {
@@ -71,7 +62,6 @@ exports.tournamentEnter = function(req, res) {
         res.redirect('/tournament/'+req.params.id);
      });
     } else{
-      console.log("user already in list");
       res.redirect('/tournament/'+req.params.id);
     }
   });
