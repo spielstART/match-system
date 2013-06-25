@@ -18,7 +18,8 @@ for(var i = 0; i < 20; i++) {
 for(var j = 0; j < 5; j++) {
     var tournament = new models.Tournament({
         title: Faker.Name.firstName(),
-        open: Math.round(Math.random())
+        open: Math.round(Math.random()),
+        users: []
     });
 
     tournament.save();
