@@ -71,6 +71,23 @@ exports.tournamentStart = function(req, res) {
           throw err;
         } else {
           console.log("Event started");
+          models.Tournament.findOne({_id: req.params.id}).exec(function(err, tournament) {
+            console.log("Users:", tournament.users);
+            if(tournament.users.length % 2 == 0) {
+              for(var i = 0, j = 1; i < tournament.users.length; j++) {
+                var playerList = models.PlayerList({
+                  tournament: tournament._id,
+                  players: [tournament.users[i++], tournament.users[i++]],
+                  round: 1,
+                  group: "Group " + j
+                });
+                playerList.save();
+                console.log(playerList);
+              }
+            } else {
+              console.log("Invalid number of players for this tournament to start.");
+            }
+          });
         }
       });
     }
