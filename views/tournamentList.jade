@@ -19,3 +19,7 @@ block content
               i.icon-group
               span  #{entry.users.length} users joined.
             a(href='/tournament/' + entry._id).btn Details
+
+  if user.isAdmin
+    p
+      a(href='/tournament/create').btn Create tournament

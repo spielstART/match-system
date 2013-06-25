@@ -10,6 +10,7 @@ exports.tournamentList = function(req, res) {
       } else {
         res.render('tournamentList', {
           title: 'Tournament list',
+          user: req.user,
           tournaments: tournament
         });
       }
