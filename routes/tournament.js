@@ -59,35 +59,35 @@ exports.tournamentDetail = function(req, res) {
 };
 
 exports.tournamentEnter = function(req, res) {
-  models.PlayerList.find({player: req.user._id}, function(err, user) {
+  models.Tournament.findOne({_id: req.params.id}, function(err, tournament) {
     if(err) {
       throw err;
-    } else if (user[0] === undefined){
-      var tournament = new models.PlayerList({player: req.user._id});
-      tournament.save(function (err) {
-        if (err) {
-          throw err;
-        }
-        console.log(req.user.username + " enrolled in tournament!");
-        res.redirect('/tournament/'+req.params.id);
-     });
-    } else{
+    } else {
+      if(tournament.userInTournament(req.user)) {
+        console.log('user is already in the tournament');
+      } else {
+        models.Tournament.update({_id: req.params.id}, {$push: {'users': req.user._id}}, function(err, data) {
+          if(err) {
+            throw err;
+          }
+        }).exec();
+      }
       res.redirect('/tournament/'+req.params.id);
     }
   });
 };
 
 exports.tournamentLeave = function(req, res) {
-  models.PlayerList.find({player: req.user._id}, function(err, user) {
+  models.Tournament.findOne({_id: req.params.id, users: req.user._id}, function(err, tournament) {
     if (err) {
       throw err;
-    } else if (user[0] === undefined) {
-      console.log("user not in list");
-      res.redirect('/tournament/'+req.param.id);
     } else {
-      user[0].remove(function (err){if (err) throw err;});
-      console.log(req.user.username + " left the tournament!");
-      res.redirect('/tournament/'+req.params.id);
+      models.Tournament.update({_id: req.params.id}, {$pull: {'users': req.user._id}}, function(err) {
+        if(err) {
+          throw err;
+        }
+      }).exec();
     }
+    res.redirect('/tournament/'+req.params.id);
   });
 };
