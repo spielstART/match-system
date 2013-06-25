@@ -4,26 +4,19 @@ block content
   div.page-header
     h1= title
 
-
-  if !playerlist
-    p no players yet!
-  else
-    div.well
-      table.table
-        thead
+  div.well
+    table.table
+      thead
+        tr
+          th #
+          th Username
+          th E-Mail
+      tbody
+        for entry, number in tournament.users
           tr
-            th #
-            th Username
-            th E-Mail
-        tbody
-          for entry, number in tournament.users
-            tr
-              td= number+1
-              td= entry.username
-              td= entry.email
-
-
-
+            td= number+1
+            td= entry.username
+            td= entry.email
 
   form(action='/tournament/#{tournament._id}/enter', method='post')
     input(type='submit', value='Enter Tournament').btn

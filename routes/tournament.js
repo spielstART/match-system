@@ -41,11 +41,16 @@ exports.tournamentCreate = function(req, res) {
 
 exports.tournamentDetail = function(req, res) {
   if(req.user) {
-    models.Tournament.findOne({_id: req.params.id}).exec(function(err, tournament) {
+    models.Tournament.findOne({_id: req.params.id}).populate('users').exec(function(err, tournament) {
       if(err) {
         throw err;
       } else {
-          res.render('tournamentDetail', {title: tournament.title, tournament: tournament, user: req.user});
+        res.render('tournamentDetail', {
+          title: tournament.title,
+          tournament: tournament,
+          userInTournament: tournament.userInTournament(req.user),
+          user: req.user
+        });
       }
     });
   } else {
