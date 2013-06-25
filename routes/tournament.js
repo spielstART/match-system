@@ -66,7 +66,7 @@ exports.tournamentDetail = function(req, res) {
 exports.tournamentStart = function(req, res) {
   if(req.user) {
     if(req.user.isAdmin) {
-      models.Tournament.update({_id: req.params.id}, {open: false}, function(err, data) {
+      models.Tournament.update({_id: req.params.id}, {open: false, started: true}, function(err, data) {
         if(err) {
           throw err;
         } else {
