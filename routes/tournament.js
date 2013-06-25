@@ -66,7 +66,7 @@ exports.tournamentEnter = function(req, res) {
       if(tournament.userInTournament(req.user)) {
         console.log('user is already in the tournament');
       } else {
-        models.Tournament.update({_id: req.params.id}, {$push: {'users': req.user._id}}, function(err, data) {
+        models.Tournament.update({_id: req.params.id}, {$addToSet: {'users': req.user._id}}, function(err, data) {
           if(err) {
             throw err;
           }
