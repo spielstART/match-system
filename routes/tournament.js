@@ -61,6 +61,23 @@ exports.tournamentDetail = function(req, res) {
   } else {
     res.redirect('/user/signin');
   }
+}
+
+exports.tournamentStart = function(req, res) {
+  if(req.user) {
+    if(req.user.isAdmin) {
+      models.Tournament.update({_id: req.params.id}, {open: false}, function(err, data) {
+        if(err) {
+          throw err;
+        } else {
+          console.log("Event started");
+        }
+      });
+    }
+    res.redirect('/tournament/'+req.params.id);
+  } else {
+    res.redirect('/user/signin');
+  }
 };
 
 exports.tournamentEnter = function(req, res) {
