@@ -15,4 +15,7 @@ block content
             h4 #{entry.title}
               if entry.open
                 small  Open for enrollment
+            p
+              i.icon-group
+              span  #{entry.users.length} users joined.
             a(href='/tournament/' + entry._id).btn Details
