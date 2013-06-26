@@ -6,9 +6,9 @@ block content
       div.pull-right
         if user.isAdmin
           if tournament.status == 'open'
-            a(href='/tournament/#{tournament._id}/close').btn Close
+            a(href='/tournament/#{tournament._id}/close').btn Close enrollment
           if tournament.status == 'close'
-            a(href='/tournament/#{tournament._id}/open').btn Open
+            a(href='/tournament/#{tournament._id}/open').btn Open for enrollment
             a(href='/tournament/#{tournament._id}/start').btn.btn-primary Start tournament
 
   div.well
