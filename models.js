@@ -7,7 +7,6 @@ var userSchema = mongoose.Schema({
   email: {type: String, required: true},
   registered: {type: Boolean, default: false},
   created: {type: Date, default: Date.now},
-  role: { type: String, default: 'user' },
   isAdmin: {type: Boolean, default: false}
 });
 
