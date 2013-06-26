@@ -44,7 +44,7 @@ exports.tournamentClose = function(req, res) {
         }
       });
     }
-    res.redirect('/tournament/list');
+    res.redirect('/tournament/'+req.params.id);
   } else {
     res.redirect('/user/signin');
   }
