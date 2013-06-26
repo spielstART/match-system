@@ -26,7 +26,7 @@ exports.tournamentCreate = function(req, res) {
       if(req.method == 'POST') {
         var tournament = new models.Tournament({
           title: req.body.title,
-          open: true,
+          status: 'open',
           users: []
         });
         tournament.save();
@@ -66,7 +66,7 @@ exports.tournamentDetail = function(req, res) {
 exports.tournamentStart = function(req, res) {
   if(req.user) {
     if(req.user.isAdmin) {
-      models.Tournament.update({_id: req.params.id}, {open: false, started: true}, function(err, data) {
+      models.Tournament.update({_id: req.params.id}, {status: 'run'}, function(err, data) {
         if(err) {
           throw err;
         } else {

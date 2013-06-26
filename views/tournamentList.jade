@@ -16,9 +16,9 @@ block content
           div.thumbnail
             img(src='http://placehold.it/260x130', style='margin-right: 10px;')
             h4 #{entry.title}
-              if entry.open
+              if entry.status == 'open'
                 small  Open for enrollment
-              else if entry.started
+              else if entry.status == 'run'
                 small  Currently running
             p
               i.icon-group
