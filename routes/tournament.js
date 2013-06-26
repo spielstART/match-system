@@ -133,14 +133,16 @@ exports.tournamentEnter = function(req, res) {
       if(err) {
         throw err;
       } else {
-        if(tournament.userInTournament(req.user)) {
-          console.log('user is already in the tournament');
-        } else {
-          models.Tournament.update({_id: req.params.id}, {$addToSet: {'users': req.user._id}}, function(err, data) {
-            if(err) {
-              throw err;
-            }
-          }).exec();
+        if(tournament.status == 'open') {
+          if(tournament.userInTournament(req.user)) {
+            console.log('user is already in the tournament');
+          } else {
+            models.Tournament.update({_id: req.params.id}, {$addToSet: {'users': req.user._id}}, function(err, data) {
+              if(err) {
+                throw err;
+              }
+            }).exec();
+          }
         }
         res.redirect('/tournament/'+req.params.id);
       }
@@ -155,11 +157,13 @@ exports.tournamentLeave = function(req, res) {
     if (err) {
       throw err;
     } else {
-      models.Tournament.update({_id: req.params.id}, {$pull: {'users': req.user._id}}, function(err) {
-        if(err) {
-          throw err;
-        }
-      }).exec();
+      if(tournament.status == 'open') {
+        models.Tournament.update({_id: req.params.id}, {$pull: {'users': req.user._id}}, function(err) {
+          if(err) {
+            throw err;
+          }
+        }).exec();
+      }
     }
     res.redirect('/tournament/'+req.params.id);
   });
