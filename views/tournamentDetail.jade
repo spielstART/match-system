@@ -9,9 +9,7 @@ block content
             a(href='/tournament/#{tournament._id}/close').btn Close
           if tournament.status == 'close'
             a(href='/tournament/#{tournament._id}/open').btn Open
-      if user.isAdmin && tournament.status != 'run' && tournament.status != 'close'
-        form(action='/tournament/#{tournament._id}/start', method='post').pull-right
-          input(type='submit', value='Start tournament').btn
+            a(href='/tournament/#{tournament._id}/start').btn.btn-primary Start tournament
 
   div.well
     table.table

@@ -99,7 +99,7 @@ app.post('/tournament/create', currentUser, routesTournament.tournamentCreate);
 app.get('/tournament/:id', currentUser, routesTournament.tournamentDetail);
 app.get('/tournament/:id/close', routesTournament.tournamentClose);
 app.get('/tournament/:id/open', routesTournament.tournamentOpen);
-app.post('/tournament/:id/start', routesTournament.tournamentStart);
+app.get('/tournament/:id/start', routesTournament.tournamentStart);
 app.post('/tournament/:id/enter', routesTournament.tournamentEnter);
 app.post('/tournament/:id/leave', routesTournament.tournamentLeave);
 
