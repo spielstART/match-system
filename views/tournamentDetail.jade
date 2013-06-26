@@ -3,9 +3,10 @@ extends layout
 block content
   div.page-header
     h1= title
-      if user.isAdmin && tournament.status == 'open'
-        form(action='/tournament/#{tournament._id}/close', method='post').pull-right
-          input(type='submit', value='Close').btn
+      div.pull-right
+        if user.isAdmin
+          if tournament.status == 'open'
+            a(href='/tournament/#{tournament._id}/close').btn Close
       if user.isAdmin && tournament.status != 'run' && tournament.status != 'close'
         form(action='/tournament/#{tournament._id}/start', method='post').pull-right
           input(type='submit', value='Start tournament').btn
