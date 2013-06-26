@@ -20,6 +20,21 @@ exports.tournamentList = function(req, res) {
   }
 };
 
+exports.tournamentOpen = function(req, res) {
+  if(req.user) {
+    if(req.user.isAdmin) {
+      models.Tournament.update({_id: req.params.id}, {status: 'open'}, function(err, data) {
+        if(err) {
+          throw err;
+        }
+      });
+    }
+    res.redirect('/tournament/'+req.params.id);
+  } else {
+    res.redirect('/user/signin');
+  }
+};
+
 exports.tournamentClose = function(req, res) {
   if(req.user) {
     if(req.user.isAdmin) {
