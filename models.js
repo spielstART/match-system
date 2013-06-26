@@ -45,6 +45,10 @@ tournamentSchema.methods.userInTournament = function(user) {
   return userInTournament;
 }
 
+tournamentSchema.methods.startable = function() {
+  return this.users.length % 2 == 0;
+}
+
 // player Schema
 var playerSchema = mongoose.Schema({
   player: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
