@@ -91,7 +91,7 @@ app.post('/user/login', passport.authenticate('local', {
   failureRedirect: '/user/signin',
   failureFlash: true
 }));
-app.get('/user/delete/:id', user.deleteUser);
+app.get('/user/delete/:id', routesUser.deleteUser);
 
 var routesTournament = require('./routes/tournament');
 app.get('/tournament/list', currentUser, routesTournament.tournamentList);
