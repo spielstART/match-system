@@ -17,13 +17,13 @@ html
             span.icon-bar
           a(href='/').brand Match-System
           div.nav-collapse.collapse
-          - console.log(currentUser);
             ul.nav
-              li
-                a(href='/users') Userlist
               if currentUser.username
                 li
                   a(href='/tournament/list') Tournaments
+                if currentUser.isAdmin
+                  li
+                    a(href='/users') Userlist
             ul.nav.pull-right
               if currentUser.username
                 li.dropdown
