@@ -6,7 +6,7 @@ var async = require("async");
 exports.list = function(req, res) {
   var query = models.User.find();
 
-  query.select('username email created');
+  query.select('username email created isAdmin');
 
   query.exec(function(err, users) {
     if (err) {
@@ -56,7 +56,7 @@ exports.activateuser = function(req, res) {
 
  exports.deleteUser = function(req, res){
     
-    db.User.findById(req.params.id, function(err, user){
+    models.User.findById(req.params.id, function(err, user){
         if(err)
             throw err;
         else

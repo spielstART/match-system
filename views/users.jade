@@ -13,7 +13,7 @@ block content
         th E-Mail
         th User ID
         th Creation date
-        th Role
+        th Admin
         th(style="width: 40px;")
     tbody
       for user in users
@@ -24,7 +24,7 @@ block content
           td= user.email
           td= user._id         
           td= user.created.toDateString()
-          td= user.role
+          td= user.isAdmin
           td
             a(href='/user/update')
               i.icon-pencil
