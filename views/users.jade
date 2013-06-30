@@ -4,6 +4,8 @@ extends layout
 
 block content
 
+    script(src='/js/userUpdate_getId.js')
+
     div#myModal.modal.hide.fade( tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
         div.modal-header
             button(type="button", data-dismiss="modal", aria-hidden="true").close ×
@@ -18,6 +20,8 @@ block content
                         input(id="password", name="password", type="password", placeholder="Password").input-xlarge
                     div.control-group
                         input(id="email", name="email", type="text", placeholder="E-Mail").input-xlarge
+                    div.control-group
+                        input(id="userID", name="userID", type="text", placeholder="userID").input-xlarge.userID
                     div.control-group
                         label.checkbox is registered
                             input(type="checkbox", name="registered", value="registered")
@@ -56,7 +60,7 @@ block content
                     td= user.registered
                     td= user.isAdmin
                     td
-                        a(href="#myModal", role="button", data-toggle="modal")
+                        a(href="#myModal", role="button", data-toggle="modal", data-id= '#{user._id}').openForm
                             i.icon-pencil
                         a(href='/user/delete/' + user._id , role="button")
                             i.icon-remove
