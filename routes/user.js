@@ -54,6 +54,27 @@ exports.activateuser = function(req, res) {
 };
 
 
+ exports.deleteUser = function(req, res){
+    
+    db.User.findById(req.params.id, function(err, user){
+        if(err)
+            throw err;
+        else
+            console.log("deleting user!");
+            user.remove();
+            res.redirect('back');
+    });
+
+ }
+ 
+ exports.updateUser = function(req, res){
+ 
+    // @Todo: Update Player with new Data;
+ 
+ 
+ }
+
+
 // POST
 exports.register = function(req, res) {
   if( req.body.username === '' || req.body.password === '' || req.body.email === '') {

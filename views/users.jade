@@ -11,7 +11,10 @@ block content
         th #
         th Username
         th E-Mail
+        th User ID
         th Creation date
+        th Role
+        th(style="width: 40px;")
     tbody
       for user in users
         - number++;
@@ -19,4 +22,11 @@ block content
           td= number
           td= user.username
           td= user.email
+          td= user._id         
           td= user.created.toDateString()
+          td= user.role
+          td
+            a(href='/user/update')
+              i.icon-pencil
+            a(href='/user/delete/' + user._id , role="button")
+              i.icon-remove
