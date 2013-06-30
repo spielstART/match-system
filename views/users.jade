@@ -12,7 +12,7 @@ block content
             h3#myModalLabel Update User
 
         div.modal-body
-            form.form-horizontal
+            form(action="/user/updateuser", method="post").form-horizontal
                 fieldset
                     div.control-group
                         input(id="username", name="username", type="text", placeholder="Username").input-xlarge
@@ -21,17 +21,17 @@ block content
                     div.control-group
                         input(id="email", name="email", type="text", placeholder="E-Mail").input-xlarge
                     div.control-group
-                        input(id="userID", name="userID", type="text", placeholder="userID").input-xlarge.userID
+                        input(id="UserId", name="userId", type="hidden", value="test")#UserId
                     div.control-group
                         label.checkbox is registered
-                            input(type="checkbox", name="registered", value="registered")
+                            input(type="checkbox", name="registered", value="true")
                         label.checkbox is admin
-                            input(type="checkbox", name="admin", value="admin")
+                            input(type="checkbox", name="admin", value="true")
+                    div.control-group
+                        input(type="submit", value="Save Changes").btn.btn-primary
                     
         div.modal-footer
             button(data-dismiss="modal", aria-hidden="true").btn Close
-            button.btn.btn-primary Save changes
-
 
     div.page-header
         h1= title

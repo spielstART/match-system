@@ -66,16 +66,58 @@ exports.activateuser = function(req, res) {
     });
 
  }
+
+
+
+// POST
+
+
  
  exports.updateUser = function(req, res){
  
     // @Todo: Update Player with new Data;
- 
+    console.log(req.body);
+    console.log(req.body.username);
+    console.log(req.body.registered);
+    
+    models.User.findById(req.body.userId, function(err, user){
+        if(err)
+            throw err;
+        else
+        {
+        
+            if(req.body.username != '')
+                user.username = req.body.username;
+                
+            if(req.body.password != '')
+                user.password = req.body.password;
+                
+            if(req.body.email != '')  
+                user.email = req.body.email;
+                
+            if(req.body.registered != undefined){
+                user.registered = true;
+            }
+            else{
+                user.registered = false;
+            }
+            
+            if(req.body.admin != undefined){
+                user.isAdmin = true;
+            }
+            else{
+                user.isAdmin = false;
+            }
+            
+            user.save();
+        }
+
+        res.redirect('back');
+    });
+    
  
  }
 
-
-// POST
 exports.register = function(req, res) {
   if( req.body.username === '' || req.body.password === '' || req.body.email === '') {
     req.flash('error', 'Missing credentials');
