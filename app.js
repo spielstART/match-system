@@ -92,6 +92,7 @@ app.post('/user/login', passport.authenticate('local', {
   failureFlash: true
 }));
 app.get('/user/delete/:id', routesUser.deleteUser);
+app.get('/user/update/:id', routesUser.updateUser);
 
 var routesTournament = require('./routes/tournament');
 app.get('/tournament/list', currentUser, routesTournament.tournamentList);
