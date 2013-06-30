@@ -6,7 +6,7 @@ var async = require("async");
 exports.list = function(req, res) {
   var query = models.User.find();
 
-  query.select('username email created isAdmin');
+  query.select('username email created isAdmin registered');
 
   query.exec(function(err, users) {
     if (err) {

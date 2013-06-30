@@ -1,32 +1,63 @@
 extends layout
 
+
+
 block content
-  div.page-header
-    h1= title
-  p.well List of all registered users.
-  - var number = 0;
-  table.table
-    thead
-      tr
-        th #
-        th Username
-        th E-Mail
-        th User ID
-        th Creation date
-        th Admin
-        th(style="width: 40px;")
-    tbody
-      for user in users
-        - number++;
-        tr
-          td= number
-          td= user.username
-          td= user.email
-          td= user._id         
-          td= user.created.toDateString()
-          td= user.isAdmin
-          td
-            a(href='/user/update/' + user._id , role="button")
-              i.icon-pencil
-            a(href='/user/delete/' + user._id , role="button")
-              i.icon-remove
+
+    div#myModal.modal.hide.fade( tabindex="-1", role="dialog", aria-labelledby="myModalLabel", aria-hidden="true")
+        div.modal-header
+            button(type="button", data-dismiss="modal", aria-hidden="true").close ×
+            h3#myModalLabel Update User
+
+        div.modal-body
+            form.form-horizontal
+                fieldset
+                    div.control-group
+                        input(id="username", name="username", type="text", placeholder="Username").input-xlarge
+                    div.control-group
+                        input(id="password", name="password", type="password", placeholder="Password").input-xlarge
+                    div.control-group
+                        input(id="email", name="email", type="text", placeholder="E-Mail").input-xlarge
+                    div.control-group
+                        label.checkbox is registered
+                            input(type="checkbox", name="registered", value="registered")
+                        label.checkbox is admin
+                            input(type="checkbox", name="admin", value="admin")
+                    
+        div.modal-footer
+            button(data-dismiss="modal", aria-hidden="true").btn Close
+            button.btn.btn-primary Save changes
+
+
+    div.page-header
+        h1= title
+    p.well List of all registered users.
+    - var number = 0;
+    table.table
+        thead
+            tr
+                th #
+                th Username
+                th E-Mail
+                th User ID
+                th Creation date
+                th Registered
+                th Admin
+                th(style="width: 40px;")
+        tbody
+            for user in users
+                - number++;
+                tr
+                    td= number
+                    td= user.username
+                    td= user.email
+                    td= user._id         
+                    td= user.created.toDateString()
+                    td= user.registered
+                    td= user.isAdmin
+                    td
+                        a(href="#myModal", role="button", data-toggle="modal")
+                            i.icon-pencil
+                        a(href='/user/delete/' + user._id , role="button")
+                            i.icon-remove
+            
