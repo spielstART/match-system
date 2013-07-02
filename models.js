@@ -50,7 +50,7 @@ tournamentSchema.methods.startable = function() {
 
 // player Schema
 var playerSchema = mongoose.Schema({
-  player: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   score: { type: Number }
 });
 
