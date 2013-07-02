@@ -25,13 +25,12 @@ block content
             td= number+1
             td= entry.username
             td= entry.email
-  if tournament.open
+  if tournament.status == 'open'
     if userInTournament
       form(action='/tournament/#{tournament._id}/leave', method='post')
         input(type='submit', value='Leave Tournament').btn
     else
       form(action='/tournament/#{tournament._id}/enter', method='post')
         input(type='submit', value='Enter Tournament').btn
-
   br
   a(href='/tournament/list').btn Back
