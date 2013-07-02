@@ -119,13 +119,23 @@ exports.tournamentStart = function(req, res) {
             console.log("Users:", tournament.users);
             if(tournament.users.length % 2 == 0) {
               for(var i = 0, j = 1; i < tournament.users.length; j++) {
+                var player1 = models.Player({
+                  user: tournament.users[i++], score: 0
+                });
+                player1.save();
+                var player2 = models.Player({
+                  user: tournament.users[i++], score: 0
+                });
+                player2.save();
+
                 var playerList = models.PlayerList({
                   tournament: tournament._id,
-                  players: [tournament.users[i++], tournament.users[i++]],
+                  players: [player1, player2],
                   round: 1,
                   group: "Group " + j
                 });
                 playerList.save();
+
                 console.log(playerList);
               }
             } else {
