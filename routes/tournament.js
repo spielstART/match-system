@@ -192,3 +192,24 @@ exports.tournamentLeave = function(req, res) {
     res.redirect('/tournament/'+req.params.id);
   });
 };
+
+exports.tournamentScore = function(req, res) {
+  if(req.user && req.user.isAdmin) {
+    models.Player.findOne({_id: req.body.id}).exec(function(err, player) {
+      if(err) {
+        throw error;
+      }
+      var value = parseInt(req.body.value);
+      if(Math.abs(value) === 1 && player.score + value >= 0) {
+        player.score += value;
+        player.save();
+
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end("" + player.score);
+      } else {
+        res.writeHead(500);
+        res.end();
+      }
+    });
+  }
+};

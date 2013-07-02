@@ -104,6 +104,7 @@ app.get('/tournament/:id/open', routesTournament.tournamentOpen);
 app.get('/tournament/:id/start', routesTournament.tournamentStart);
 app.post('/tournament/:id/enter', routesTournament.tournamentEnter);
 app.post('/tournament/:id/leave', routesTournament.tournamentLeave);
+app.post('/tournament/score', routesTournament.tournamentScore);
 
 
 http.createServer(app).listen(app.get('port'), function(){

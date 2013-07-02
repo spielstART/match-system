@@ -49,13 +49,13 @@ block content
               h4 #{entry.group}
               table.table
                 for player in entry.players
-                  tr
+                  tr(data-player="#{player.id}")
                     td(style="width: 80%") #{player.user.username}
                     td
-                      input(type="button",value="-").btn.btn-mini
-                    td #{player.score}
+                      input(type="button",value="-").btn.btn-mini.btn-score
+                    td.score #{player.score}
                     td
-                      input(type="button",value="+").btn.btn-mini
+                      input(type="button",value="+").btn.btn-mini.btn-score
           div.span4
             h4 Match 1
             table.table
@@ -92,3 +92,5 @@ block content
                 td 0
   br
   a(href='/tournament/list').btn Back
+
+  script(src='/js/tournament.js')
