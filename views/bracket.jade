@@ -1,12 +1,126 @@
 extends layout
 
 block content
-  h3 Tournament bracket
+  ul.nav.nav-tabs
+    li.active
+      a(href="#tabular",data-toggle="tab") Tabular
+        li
+          a(href="#visual",data-toggle="tab") Visual
 
-  div.row
-    - for (var i = 1; i <= 8; ++i) {
-    div.span3
-      p
-        a(href="#").thumbnail
-          img(alt="260x180",style="width: 260px; height: 180px;",src="http://placehold.it/260x180&text=User #{i}")
-    - }
+    div.tab-content
+      div(id="tabular").tab-pane.active
+        h3 Tournament overview
+
+          div.row
+            div.span4
+              h4 Group 1
+                table.table
+                  tr
+                    td Player 1
+                      td
+                        input(type="button",value="-").btn.btn-mini
+                          td 0
+                            td
+                              input(type="button",value="+").btn.btn-mini
+                        tr
+                          td Player 2
+                            td
+                              input(type="button",value="-").btn.btn-mini
+                            td 0
+                            td
+                              input(type="button",value="+").btn.btn-mini
+                    h4 Group 2
+                    table.table
+                      tr
+                        td Player 3
+                          td
+                            input(type="button",value="-").btn.btn-mini
+                            td 0
+                            td
+                              input(type="button",value="+").btn.btn-mini
+                        tr
+                          td Player 4
+                            td
+                              input(type="button",value="-").btn.btn-mini
+                            td 0
+                            td
+                              input(type="button",value="+").btn.btn-mini
+                    h4 Group 3
+                    table.table
+                      tr
+                        td Player 5
+                          td
+                            input(type="button",value="-").btn.btn-mini
+                            td 0
+                            td
+                              input(type="button",value="+").btn.btn-mini
+                        tr
+                          td Player 6
+                            td
+                              input(type="button",value="-").btn.btn-mini
+                            td 0
+                            td
+                              input(type="button",value="+").btn.btn-mini
+                    h4 Group 4
+                    table.table
+                      tr
+                        td Player 7
+                          td
+                            input(type="button",value="-").btn.btn-mini
+                            td 0
+                            td
+                              input(type="button",value="+").btn.btn-mini
+                        tr
+                          td Player 8
+                            td
+                              input(type="button",value="-").btn.btn-mini
+                            td 0
+                            td
+                              input(type="button",value="+").btn.btn-mini
+                div.span4
+                  h4 Match 1
+                    table.table
+                      tr
+                        td TBA
+                          td 0
+                        tr
+                          td TBA
+                            td 0
+                    h4 Match 2
+                    table.table
+                      tr
+                        td TBA
+                          td 0
+                        tr
+                          td TBA
+                            td 0
+                div.span4
+                  h4 Finals
+                    table.table
+                      tr
+                        td TBA
+                            td 0
+                        tr
+                            td TBA
+                            td 0
+                    h4 3rd Place
+                    table.table
+                        tr
+                            td TBA
+                            td 0
+                        tr
+                            td TBA
+                            td 0
+        div(id="visual").tab-pane
+            h3 Tournament bracket
+
+            div.row
+            - for (var i = 1; i <= 8; ++i) {
+                div.span3
+                    p
+                        div.thumbnail
+                            img(alt="260x180",style="width: 260px; height: 180px;",src="http://placehold.it/260x180&text=Player #{i}")
+                            h3 Player #{i}
+                            p Score 0 - 0
+
+            - }
