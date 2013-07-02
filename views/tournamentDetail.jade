@@ -50,7 +50,7 @@ block content
               table.table
                 for player in entry.players
                   tr
-                    td #{player.user.username}
+                    td(style="width: 80%") #{player.user.username}
                     td
                       input(type="button",value="-").btn.btn-mini
                     td #{player.score}
