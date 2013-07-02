@@ -80,12 +80,26 @@ exports.tournamentDetail = function(req, res) {
       if(err) {
         throw err;
       } else {
-        res.render('tournamentDetail', {
-          title: tournament.title,
-          tournament: tournament,
-          userInTournament: tournament.userInTournament(req.user),
-          user: req.user
-        });
+        if(tournament.status === 'run') {
+          models.PlayerList.find({tournament: tournament.id}).populate('players').exec(function(err, playerList) {
+            models.Player.populate(playerList, {path: 'players.user', model: models.User}, function(err, playerList) {
+              res.render('tournamentDetail', {
+                title: tournament.title,
+                tournament: tournament,
+                playerList: playerList,
+                userInTournament: tournament.userInTournament(req.user),
+                user: req.user
+              });
+            });
+          });
+        } else {
+          res.render('tournamentDetail', {
+            title: tournament.title,
+            tournament: tournament,
+            userInTournament: tournament.userInTournament(req.user),
+            user: req.user
+          });
+        }
       }
     });
   } else {
