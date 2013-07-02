@@ -12,25 +12,135 @@ block content
             if tournament.startable()
               a(href='/tournament/#{tournament._id}/start').btn.btn-primary Start tournament
 
-  div.well
-    table.table
-      thead
-        tr
-          th #
-          th Username
-          th E-Mail
-      tbody
-        for entry, number in tournament.users
-          tr
-            td= number+1
-            td= entry.username
-            td= entry.email
-  if tournament.status == 'open'
-    if userInTournament
-      form(action='/tournament/#{tournament._id}/leave', method='post')
-        input(type='submit', value='Leave Tournament').btn
-    else
-      form(action='/tournament/#{tournament._id}/enter', method='post')
-        input(type='submit', value='Enter Tournament').btn
+  ul.nav.nav-tabs
+    li.active
+      a(href="#default",data-toggle="tab") Default
+    if tournament.status == 'run'
+      li
+        a(href="#visual",data-toggle="tab") Visual bracket
+
+  div.tab-content
+    div(id="default").tab-pane.active
+      div.well
+        table.table
+          thead
+            tr
+              th #
+              th Username
+              th E-Mail
+          tbody
+            for entry, number in tournament.users
+              tr
+                td= number+1
+                td= entry.username
+                td= entry.email
+      if tournament.status == 'open'
+        if userInTournament
+          form(action='/tournament/#{tournament._id}/leave', method='post')
+            input(type='submit', value='Leave Tournament').btn
+        else
+          form(action='/tournament/#{tournament._id}/enter', method='post')
+            input(type='submit', value='Enter Tournament').btn
+    div(id="visual").tab-pane
+      div.row
+        div.span4
+          h4 Group 1
+          table.table
+            tr
+              td Player 1
+              td
+                input(type="button",value="-").btn.btn-mini
+              td 0
+              td
+                input(type="button",value="+").btn.btn-mini
+              tr
+                td Player 2
+                td
+                  input(type="button",value="-").btn.btn-mini
+                td 0
+                td
+                  input(type="button",value="+").btn.btn-mini
+          h4 Group 2
+          table.table
+            tr
+              td Player 3
+              td
+                input(type="button",value="-").btn.btn-mini
+              td 0
+              td
+                input(type="button",value="+").btn.btn-mini
+            tr
+              td Player 4
+              td
+                input(type="button",value="-").btn.btn-mini
+              td 0
+              td
+                input(type="button",value="+").btn.btn-mini
+          h4 Group 3
+          table.table
+            tr
+              td Player 5
+              td
+                input(type="button",value="-").btn.btn-mini
+              td 0
+              td
+                input(type="button",value="+").btn.btn-mini
+            tr
+              td Player 6
+              td
+                input(type="button",value="-").btn.btn-mini
+              td 0
+              td
+                input(type="button",value="+").btn.btn-mini
+          h4 Group 4
+          table.table
+            tr
+              td Player 7
+              td
+                input(type="button",value="-").btn.btn-mini
+              td 0
+              td
+                input(type="button",value="+").btn.btn-mini
+            tr
+              td Player 8
+              td
+                input(type="button",value="-").btn.btn-mini
+              td 0
+              td
+                input(type="button",value="+").btn.btn-mini
+        div.span4
+          h4 Match 1
+          table.table
+            tr
+              td TBA
+              td 0
+            tr
+              td TBA
+              td 0
+          h4 Match 2
+          table.table
+            tr
+              td TBA
+              td 0
+            tr
+              td TBA
+              td 0
+        div.span4
+          h4 Finals
+          table.table
+            tr
+              td TBA
+              td 0
+            tr
+              td TBA
+              td 0
+          h4 3rd Place
+          table.table
+            tr
+              td TBA
+              td 0
+            tr
+              td TBA
+              td 0
   br
   a(href='/tournament/list').btn Back
