@@ -70,3 +70,8 @@ Implementation of a Match-System NodeJS module.
 ### Milestone 5 (25. June 2013)
 
 * Scale the logic of the bracket system for multiple number of players
+
+
+# Abgabe
+
+https://github.com/hsa-nodejs-workshop/match-system/releases/done-for-now
